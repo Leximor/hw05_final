@@ -1,17 +1,10 @@
-
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_page
 
 from .forms import CommentForm, PostForm
 from .models import Follow, Group, Post, User
-
-
-def get_one_page(request, posts):
-    paginator = Paginator(posts, 10)
-    page_number = request.GET.get('page')
-    return paginator.get_page(page_number)
+from .utility import get_one_page
 
 
 @cache_page(20)
@@ -34,7 +27,7 @@ def group_posts(request, slug):
 
 
 def profile(request, username):
-    author = User.objects.get(username=username)
+    author = get_object_or_404(User, username=username)
     posts = author.posts.all()
     page_obj = get_one_page(request, posts)
     following = (request.user.is_authenticated
