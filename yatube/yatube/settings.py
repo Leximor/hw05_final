@@ -30,6 +30,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '[::1]',
     'testserver',
+    'www.ZeLvo.pythonanywhere.com',
+    'ZeLvo.pythonanywhere.com',
 ]
 
 
@@ -47,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'posts.apps.PostsConfig',
     'sorl.thumbnail',
+    'debug_toolbar',
+
 ]
 
 MIDDLEWARE = [
@@ -57,6 +61,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
+]
+
+INTERNAL_IPS = [
+    'localhost',
+    '127.0.0.1',
+    '[::1]',
+    'testserver',
 ]
 
 ROOT_URLCONF = 'yatube.urls'
